@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { duration, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -20,13 +20,25 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 import TimerIcon from '@material-ui/icons/Timer';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import Chip from '@material-ui/core/Chip';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import VpnKeySharpIcon from '@material-ui/icons/VpnKeySharp';
+import SentimentSatisfiedSharpIcon from '@material-ui/icons/SentimentSatisfiedSharp';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 import {
     ArgumentAxis,
     ValueAxis,
     Chart,
     LineSeries,
   } from '@devexpress/dx-react-chart-material-ui';
-
+  import {Chart as PieChart}   from "react-google-charts";
   
   const data = [
     { argument: '2021-02-03', value: 0 },
@@ -37,6 +49,8 @@ import {
     { argument: "2021-02-08", value: 0 },
     { argument: "2021-02-09", value: 1 },
   ];
+
+  
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -115,15 +129,80 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '20px',
       minHeight: '400px',
       width: '100%'
-  } 
+  },
+  
+  newUsers: {
+      marginTop: '20px',
+      display: 'flex',
+      flexDirection: 'column'   
+  },
+
+  blogs: {
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column'  
+  },
+
+  events: {
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column'    
+  },
+
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+
 
 }));
 
 function Dashboard (props){
 
     const classes = useStyles();
+
+    const [open, setOpen] = React.useState(false);
+    const [people, setPeople] = React.useState(0)
+    const [email, setEmail] = React.useState('')
+    const [duration, setDuration] = React.useState(0)
+    var [price, setPrice] = React.useState(0)
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const addPeople = () => {
+      setPeople(people+1)
+      setEmail('')
+      handleClose()
+  }
+
+  
+
+  price = 5*duration + 10*people + 500
+
+  
+  
+  const valuetext = (value) => {
+    return `${value} min`;
+  }
+
+  
+    
     return (
-        <div>
+        <div style={{backgroundColor: '#F5F5F5'}}>
             <Paper className={classes.topBar} elevation={2}>
                 <nav className={classes.navBar}>
                     <ul className={classes.ulist}>
@@ -219,17 +298,67 @@ function Dashboard (props){
                 </Grid>
 
             </Grid>
-            <Grid container>
+            <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} lg={3}>
                     <Paper className={classes.newUsers}>
+                        <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
+                            <PersonOutlineIcon style={{color: '#60E7C6'}} />
+                            <span style={{ justifyContent: 'center'}}>New Users</span>
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                        </div>
+                        <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
+                            <div><SentimentSatisfiedSharpIcon style={{fontSize:"40px"}}/></div>
+                            <div>
+                                <div>HubX</div>
+                                <div> 24 min</div>
+                            </div>
+                        </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
                     <Paper className={classes.blogs}>
+                        <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
+                            <ListAltIcon  />
+                            <span style={{ justifyContent: 'center'}}>How to sell courses blogs</span>
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                        </div>
+                        <ul style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex', flexDirection: 'column'}}>
+                            <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
+                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div>7 days ago</div>
+                            </li>
+                            <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
+                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div>7 days ago</div>
+                            </li>
+                            <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
+                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div>7 days ago</div>
+                            </li>
+                        </ul>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
                     <Paper className={classes.events}>
+                        <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
+                            <TimelineIcon  />
+                            <span style={{ justifyContent: 'center'}}>Events Logs</span>
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                        </div>
+                        <ul style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex', flexDirection: 'column'}}>
+                            <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
+                                <div style={{display: 'flex', flexDirection: 'row',width: '70%', cursor: 'pointer'}}>
+                                    <div><VpnKeySharpIcon /></div>
+                                    <div>
+                                            <div style={{color: '#60E7C6'}}>HubX</div>
+                                            <div>Logged in</div>
+                                            <div style={{color: '#60E7C6'}}>more info</div>
+                                    </div>
+                                </div>
+                                <div>20 min</div>
+                            </li>
+                           
+                        </ul>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
@@ -237,6 +366,69 @@ function Dashboard (props){
                     </Paper>
                 </Grid>
             </Grid>
+            <Button variant='contained' style={{marginTop: '20px', backgroundColor: '#60E7C6'}} onClick={handleClickOpen}>Invite</Button>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">No. of People: {people}</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    You can add the email of the person to invite amd then click add to event
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="email"
+                    label="Email Address"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
+                <Typography id="discrete-slider-always" gutterBottom>
+                    Duration of Event (min)
+                </Typography>
+                <Slider
+                    defaultValue={30}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-always"
+                    step={10}
+                    value={duration}
+                    onChange={(event,value) => setDuration(value)}
+                    valueLabelDisplay="on"
+                    />
+                <PieChart
+                    width={'500px'}
+                    height={'300px'}
+                    chartType="PieChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Task', 'Hours per Day'],
+                        ['No. of People', people*10],
+                        ['Duration of Event', duration*5],
+                        ['Price', price],
+                        
+                    ]}
+                    options={{
+                        title: 'The Price Calculator',
+                        // Just add this option
+                        slices: {
+                            0: { color: '#44475b' },
+                            1: { color: '#5367ff' },
+                            2: {color: '#00d09c'}
+                          },
+                        pieHole: 0.4,
+                    }}
+                   
+                    />
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={addPeople} color="primary" disabled={email=="" ? true : false} >
+                    Add to event
+                </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
