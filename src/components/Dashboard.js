@@ -32,6 +32,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {
     ArgumentAxis,
     ValueAxis,
@@ -51,7 +52,7 @@ import {
   ];
 
   
-
+const themeColor = '#03CBBB'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -150,6 +151,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'    
   },
 
+  trialPeriod: {
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column'  
+  },
+
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -162,7 +169,21 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-
+  
+  circle: {
+      height: '100px',
+      width: '100px',
+      borderRadius: '50%',
+      display: 'flex',
+      fkexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: '20px',
+      backgroundColor: themeColor,
+      color: '#ffffff',
+      border: '2px solid #ffffff',
+      boxShadow: '5px black'
+  }
 
 }));
 
@@ -200,7 +221,7 @@ function Dashboard (props){
     return `${value} min`;
   }
 
-  
+ 
     
     return (
         <div style={{backgroundColor: '#F5F5F5'}}>
@@ -212,10 +233,11 @@ function Dashboard (props){
                         <li className={classes.list}><Button><VisibilityIcon /><span>Preview Home Page</span></Button></li>
                         <li className={classes.list}><Button><VisibilityIcon /><span>Preview After Login</span></Button></li>
                         <li className={classes.list}><Button><PowerSettingsNewIcon /><span>View Welcome Screen</span></Button></li>
+                        <li className={classes.list}><Button variant='contained' style={{ backgroundColor: themeColor}} onClick={handleClickOpen}>Invite</Button></li>
 
                     </ul>
                     <div className={classes.help}>
-                        <Button><HelpIcon style={{color: '#60E7C6', fontSize: '35px'}}/>Help</Button>
+                        <Button><HelpIcon style={{color: themeColor, fontSize: '35px'}}/>Help</Button>
                     </div>
                 </nav>
             </Paper>
@@ -223,10 +245,10 @@ function Dashboard (props){
                 <Grid item xs={12} sm={12} lg={8} >
                     <Paper className={classes.chartPaper}>
                         <div className={classes.flexRow2}>
-                            <div><Button><DateRangeIcon style={{color: '#60E7C6'}}/>Your School</Button></div>
+                            <div><Button><DateRangeIcon style={{color: themeColor}}/>Your School</Button></div>
                             <div>
                                 <ul className={classes.ufeaturedlist}>
-                                    <li className={classes.featuredlist}><Button>New Signups</Button></li>
+                                    <li className={classes.featuredlist} ><Button style={{fontWeight: 'bold', borderBottom: '2px solid #00d09c', borderLeft: '2px solid #ffffff', borderRight: '2px solid #ffffff'}} >New Signups</Button></li>
                                     <li className={classes.featuredlist}><Button>Revenue</Button></li>
                                     <li className={classes.featuredlist}><Button>Product Sales</Button></li>
                                     <li className={classes.featuredlist}><Button>Active Learners</Button></li>
@@ -254,7 +276,7 @@ function Dashboard (props){
                                 <ArgumentAxis className={classes.chart}/>
                                 <ValueAxis showGrid={false}/>
 
-                                <LineSeries valueField="value" argumentField="argument" className={classes.chart} color='#60E7C6' />
+                                <LineSeries valueField="value" argumentField="argument" className={classes.chart} color={themeColor} />
                             </Chart>
                         </div>
                     </Paper>
@@ -263,34 +285,34 @@ function Dashboard (props){
                     <Paper className={classes.userOptions}>
                         <Grid container style={{paddingTop: '40px'}}>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><PersonOutlineIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><PersonOutlineIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>All users</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>1</div>
                             </Grid>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><CachedIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><CachedIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>Conversions</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>10%</div>
                             </Grid>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><LocalMallIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><LocalMallIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>30 days sale</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>0</div>
                             </Grid>
                         </Grid>
                         <Grid container style={{paddingTop: '40px'}}>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><TimerIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><TimerIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>Avg Time</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>0 min</div>
                             </Grid>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><ListAltIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><ListAltIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>Courses</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>0</div>
                             </Grid>
                             <Grid item xs={6} sm={4} lg={4}>
-                                <div><LoyaltyIcon style={{color: '#60E7C6', fontSize: '50px'}}/></div>
+                                <div><LoyaltyIcon style={{color: themeColor, fontSize: '50px'}}/></div>
                                 <div>Course Categories</div>
                                 <div style={{fontSize: '25px', fontWeight: '600'}}>0</div>
                             </Grid>
@@ -303,9 +325,9 @@ function Dashboard (props){
                 <Grid item xs={12} sm={6} lg={3}>
                     <Paper className={classes.newUsers}>
                         <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
-                            <PersonOutlineIcon style={{color: '#60E7C6'}} />
+                            <PersonOutlineIcon style={{color: themeColor}} />
                             <span style={{ justifyContent: 'center'}}>New Users</span>
-                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: themeColor, color: '#ffffff', marginLeft: '10px'}} />
                         </div>
                         <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
                             <div><SentimentSatisfiedSharpIcon style={{fontSize:"40px"}}/></div>
@@ -321,19 +343,19 @@ function Dashboard (props){
                         <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
                             <ListAltIcon  />
                             <span style={{ justifyContent: 'center'}}>How to sell courses blogs</span>
-                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: themeColor, color: '#ffffff', marginLeft: '10px'}} />
                         </div>
                         <ul style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex', flexDirection: 'column'}}>
                             <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
-                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div style={{width: '70%', color: themeColor, cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
                                 <div>7 days ago</div>
                             </li>
                             <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
-                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div style={{width: '70%', color: themeColor, cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
                                 <div>7 days ago</div>
                             </li>
                             <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
-                                <div style={{width: '70%', color: '#60E7C6', cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
+                                <div style={{width: '70%', color: themeColor, cursor: 'pointer'}}>Blended Learning: Why it matters and how to apply</div>
                                 <div>7 days ago</div>
                             </li>
                         </ul>
@@ -344,16 +366,16 @@ function Dashboard (props){
                         <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
                             <TimelineIcon  />
                             <span style={{ justifyContent: 'center'}}>Events Logs</span>
-                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: '#60E7C6', color: '#ffffff', marginLeft: '10px'}} />
+                            <Chip label="See all" component="a" href="#" size='small' clickable style={{ backgroundColor: themeColor, color: '#ffffff', marginLeft: '10px'}} />
                         </div>
                         <ul style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex', flexDirection: 'column'}}>
                             <li style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: '10px', marginRight: '10px'}}>
                                 <div style={{display: 'flex', flexDirection: 'row',width: '70%', cursor: 'pointer'}}>
                                     <div><VpnKeySharpIcon /></div>
                                     <div>
-                                            <div style={{color: '#60E7C6'}}>HubX</div>
+                                            <div style={{color: themeColor}}>HubX</div>
                                             <div>Logged in</div>
-                                            <div style={{color: '#60E7C6'}}>more info</div>
+                                            <div style={{color: themeColor}}>more info</div>
                                     </div>
                                 </div>
                                 <div>20 min</div>
@@ -364,10 +386,42 @@ function Dashboard (props){
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
                     <Paper className={classes.trialPeriod}>
+                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <div style={{fontSize: '20px', fontWeight: 'bold', marginLeft: '10px', marginTop: '10px'}}>Trial Period</div>
+                            <div style={{marginRight: '20px', marginTop: '10px'}}><HourglassEmptyIcon style={{color: themeColor, fontSize: '40px'}}/></div>
+                        </div>
+                        <div>
+                            <Paper className={classes.circle} elevation={3}>
+                                30 days left
+                            </Paper>
+                        </div>
+                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: '20px', marginRight: '20px'}}>
+                            <Chip label="Upgrade Now! >>" component="a" href="#" size='small' clickable style={{ backgroundColor: '#ED0394', color: '#ffffff', marginLeft: '10px'}}/>
+                        </div>
+                    </Paper>
+                    <Paper className={classes.newUsers}>
+                        <div style={{justifyContent: 'start', marginTop: '10px',marginLeft: '10px', display: 'flex'}}>
+                            <PersonOutlineIcon style={{color: themeColor}} />
+                            <span style={{ justifyContent: 'center'}}>Online Users (1)</span>
+                        </div>
+                        <div style={{ marginTop: '10px',marginLeft: '10px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between',}}>
+                            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
+                                <div>
+                                    <SentimentSatisfiedSharpIcon style={{fontSize:"40px"}}/>
+                                </div>
+                                {/* <div style={{ top: '10px', height: '10px', width: '10px', borderRadius: '50%', backgroundColor: 'green', zIndex: 5}}></div> */}
+                                <div>
+                                    HubX
+                                </div>
+                            </div>
+                            <div>
+                               <Button variant='contained' style={{fontSize: '10px', backgroundColor: themeColor, color: '#ffffff', marginRight: '20px'}} >Contact</Button>
+                            </div>
+                        </div>
                     </Paper>
                 </Grid>
             </Grid>
-            <Button variant='contained' style={{marginTop: '20px', backgroundColor: '#60E7C6'}} onClick={handleClickOpen}>Invite</Button>
+            <Button variant='contained' style={{marginTop: '20px', backgroundColor: themeColor}} onClick={handleClickOpen}>Invite</Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">No. of People: {people}</DialogTitle>
                 <DialogContent>
@@ -435,3 +489,8 @@ function Dashboard (props){
 }
 
 export default Dashboard
+
+
+// themeColor
+// '#00d09c' 
+// '#60E7C6'
