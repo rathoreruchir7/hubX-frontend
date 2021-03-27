@@ -120,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
   featuredlist: {
     listStyle: 'none',
     display: 'inline',
+    fontWeight: 300
   },
   formControl: {
     margin: theme.spacing(1),
