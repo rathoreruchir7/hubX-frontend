@@ -33,6 +33,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import './dashboard.css'
 import {
     ArgumentAxis,
     ValueAxis,
@@ -90,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'inline',
       marginRight: '10px'
   },
+
   help: {
       marginTop: '10px'
   },
@@ -183,9 +185,38 @@ const useStyles = makeStyles((theme) => ({
       color: '#ffffff',
       border: '2px solid #ffffff',
       boxShadow: '5px black'
-  }
+  },
+
 
 }));
+
+// var listContainer = document.getElementById('ufeaturedList');
+// var items = listContainer && listContainer.getElementsByClassName('featuredlist');
+
+// for(var i=0; i<items && items.length; i++)
+// {
+//     items[i].addEventListener('click', function(){
+//         var current = document.getElementsByClassName('activeItem')
+//         current[0].className = current[0].className.replace('activeItem', '')
+//         this.className += 'activeItem'
+//     })
+// }
+
+const onClickItem = (classname) => {
+    console.log(document.getElementsByClassName('listButton'))
+    var items = document.getElementsByClassName('listButton')
+
+    for(var i=0;i<items.length;i++)
+    {
+        items[i].className = items[i].className.replace(' activeItem', '')
+        console.log(items[i].className)
+    }
+
+    var item = document.getElementsByClassName(classname)
+
+    // console.log(item[0].className+=' activeItem')
+    item[0].className+=' activeItem'
+  }
 
 function Dashboard (props){
 
@@ -224,7 +255,7 @@ function Dashboard (props){
  
     
     return (
-        <div style={{backgroundColor: '#F5F5F5'}}>
+        <div style={{backgroundColor: '#F5F5F5'}} >
             <Paper className={classes.topBar} elevation={2}>
                 <nav className={classes.navBar}>
                     <ul className={classes.ulist}>
@@ -247,11 +278,11 @@ function Dashboard (props){
                         <div className={classes.flexRow2}>
                             <div><Button><DateRangeIcon style={{color: themeColor}}/>Your School</Button></div>
                             <div>
-                                <ul className={classes.ufeaturedlist}>
-                                    <li className={classes.featuredlist} ><Button style={{fontWeight: 'bold', borderBottom: '2px solid #00d09c', borderLeft: '2px solid #ffffff', borderRight: '2px solid #ffffff'}} >New Signups</Button></li>
-                                    <li className={classes.featuredlist}><Button>Revenue</Button></li>
-                                    <li className={classes.featuredlist}><Button>Product Sales</Button></li>
-                                    <li className={classes.featuredlist}><Button>Active Learners</Button></li>
+                                <ul className={classes.ufeaturedlist} id='ufeaturedList'>
+                                    <li className={classes.featuredlist}><button className='listButton newSignups buttonClass ' onClick={() => onClickItem('newSignups')}>New Signups</button></li>
+                                    <li className={classes.featuredlist}><button className='listButton revenue buttonClass' onClick={(id) => onClickItem('revenue')}>Revenue</button></li>
+                                    <li className={classes.featuredlist}><button className='listButton productSales buttonClass' onClick={(id) => onClickItem('productSales')}>Product Sales</button></li>
+                                    <li className={classes.featuredlist}><button className='listButton activeLearners buttonClass' onClick={(id) => onClickItem('activeLearners')}>Active Learners</button></li>
                                     <li className={classes.featuredlist}>
                                          <FormControl variant="filled" className={classes.formControl}>
                                            
